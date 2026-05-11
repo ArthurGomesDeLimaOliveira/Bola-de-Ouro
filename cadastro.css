@@ -1,0 +1,107 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #f2f2f2;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 15px;
+}
+
+.card {
+  width: 420px;
+  background: white;
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0px 0px 15px rgba(0,0,0,0.12);
+  text-align: center;
+  border: 1px solid #e6e6e6;
+}
+
+.card h3 {
+  font-size: 15px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  font-size: 13px;
+  color: #777;
+  margin-bottom: 20px;
+}
+
+.input-group {
+  text-align: left;
+  margin-bottom: 15px;
+}
+
+.input-group label {
+  font-size: 12px;
+  font-weight: bold;
+  color: #444;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  outline: none;
+  font-size: 13px;
+  background: #fafafa;
+}
+
+.input-group input:focus {
+  border: 1px solid #1f8f3d;
+  background: white;
+}
+
+.btn-submit {
+  width: 100%;
+  background: #1f8f3d;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+.btn-submit:hover {
+  background: #187132;
+}
+
+.bottom-text {
+  margin-top: 18px;
+  font-size: 13px;
+  color: #666;
+  border-top: 1px solid #eee;
+  padding-top: 15px;
+}
+
+.bottom-text a {
+  color: #1f8f3d;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.bottom-text a:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,293 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #f2f2f2;
+}
+
+.header {
+  width: 100%;
+  background: white;
+  padding: 15px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ddd;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-circle {
+  width: 35px;
+  height: 35px;
+  background: #1f8f3d;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 18px;
+}
+
+.logo h2 {
+  font-size: 16px;
+  color: #1f8f3d;
+  font-weight: bold;
+}
+
+.menu {
+  display: flex;
+  gap: 25px;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #444;
+  font-size: 14px;
+}
+
+.menu a:hover {
+  color: #1f8f3d;
+}
+
+.menu a.active {
+  color: #1f8f3d;
+  font-weight: bold;
+}
+
+.header-buttons {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.btn-link {
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+}
+
+.btn-green {
+  background: #1f8f3d;
+  color: white;
+  text-decoration: none;
+  padding: 8px 18px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.btn-green:hover {
+  background: #187132;
+}
+
+.banner {
+  background: linear-gradient(to right, #1f8f3d, #187132);
+  padding: 80px 15px;
+  text-align: center;
+  color: white;
+}
+
+.banner h1 {
+  font-size: 40px;
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+
+.banner p {
+  font-size: 14px;
+  color: #e7e7e7;
+}
+
+.filtro {
+  background: white;
+  padding: 25px;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  border-bottom: 1px solid #ddd;
+}
+
+.filtro-link {
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: bold;
+  color: #555;
+  padding-bottom: 5px;
+}
+
+.filtro-link:hover {
+  color: #1f8f3d;
+}
+
+.filtro-link.active {
+  color: #1f8f3d;
+  border-bottom: 2px solid #1f8f3d;
+}
+
+
+.campos-container {
+  padding: 40px 20px 80px;
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+.campo-card {
+  text-decoration: none;
+  color: inherit;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  box-shadow: 0px 3px 15px rgba(0,0,0,0.08);
+  transition: 0.2s;
+  display: block;
+}
+
+.campo-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 18px rgba(0,0,0,0.15);
+}
+
+.campo-card img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+}
+
+.campo-body {
+  padding: 18px;
+}
+
+.tag {
+  font-size: 11px;
+  font-weight: bold;
+  padding: 4px 10px;
+  border-radius: 20px;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.tag.society {
+  background: #d8ffe2;
+  color: #1f8f3d;
+}
+
+.tag.areia {
+  background: #ffe6c7;
+  color: #cc6b00;
+}
+
+.campo-body h3 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #222;
+}
+
+.campo-body p {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.chips span {
+  background: #eaf1ff;
+  color: #2451c0;
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 11px;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.features span::before {
+  content: "• ";
+  color: #1f8f3d;
+  font-weight: bold;
+}
+
+.campo-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.campo-footer strong {
+  font-size: 16px;
+  color: #1f8f3d;
+}
+
+.campo-footer strong span {
+  font-size: 12px;
+  color: #777;
+}
+
+.btn-reservar {
+  background: #1f8f3d;
+  border: none;
+  color: white;
+  padding: 7px 14px;
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-reservar:hover {
+  background: #187132;
+}
+
+@media (max-width: 1000px) {
+  .campos-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 750px) {
+  .campos-container {
+    grid-template-columns: 1fr;
+  }
+
+  .menu {
+    display: none;
+  }
+
+  .header {
+    padding: 15px 20px;
+  }
+
+  .banner h1 {
+    font-size: 30px;
+  }
+}
