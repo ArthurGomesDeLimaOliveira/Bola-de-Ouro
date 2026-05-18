@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato - Arena Bola de Ouro</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Roboto:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+
+
+    <link rel="stylesheet" href="contato.css">
+</head>
+
+<body>
+
+
+    <header>
+        <div class="container navbar">
+            <div class="logo-circle"></div>
+            <div class="logo">ARENA BOLA DE OURO</div>
+
+            <nav>
+                <ul>
+                    <nav class="menu">
+                        <a href="home.html">Início</a>
+                        <a href="campos.html">Campos</a>
+                        <a href="agendar.html">Agendar</a>
+                        <a href="contato.html">Contato</a>
+                    </nav>
+
+                </ul>
+            </nav>
+
+            <div class="actions">
+                <a href="login.html" class="login">Entrar</a>
+                <a href="cadastrar.html" class="btn">Cadastrar</a>
+            </div>
+        </div>
+    </header>
+
+
+    <section class="hero">
+        <div class="container">
+            <h1>CONTATO</h1>
+            <p>Entre em contato conosco. Estamos prontos para atender você!</p>
+        </div>
+    </section>
+
+
+    <section class="main-content">
+        <div class="container">
+            <div class="grid">
+
+
+                <div>
+                    <h2 class="section-title">Envie sua mensagem</h2>
+
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="nome">Nome completo</label>
+                            <input type="text" id="nome" required placeholder="Seu nome">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">E-mail</label>
+                            <input type="email" id="email" required placeholder="seu@email.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="telefone">Telefone</label>
+                            <input type="tel" id="telefone" placeholder="(34) 99999-9999">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="assunto">Assunto</label>
+                            <select id="assunto" required>
+                                <option value="">Selecione um assunto</option>
+                                <option>Reserva de horário</option>
+                                <option>Dúvidas</option>
+                                <option>Sugestões</option>
+                                <option>Reclamações</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mensagem">Mensagem</label>
+                            <textarea id="mensagem" required placeholder="Digite sua mensagem..."></textarea>
+                        </div>
+
+                        <button type="submit">Enviar Mensagem</button>
+                    </form>
+                </div>
+
+
+                <div>
+                    <h2 class="section-title">Informações de contato</h2>
+
+                    <div class="info-card">
+                        <h3> Endereço</h3>
+                        <p>
+                            Av. Wilson Gomes Coelho<br>
+                            Bairro - Alto da serra, Patos de Minas, MG<br>
+                            CEP: 38704-014
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3> Telefone</h3>
+                        <p>
+                            (34) 99943-0909<br>
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>E-mail</h3>
+                        <p>
+                            contato@arenaboladeouro.com.br<br>
+                            reservas@arenaboladeouro.com.br
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Horário de Funcionamento</h3>
+                        <p>
+                            Segunda a Sexta: 7h às 00:00h<br>
+                            Sábados e Domingos: 8h às 22h
+                        </p>
+                    </div>
+
+                    <div class="map-placeholder">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.0334332837506!2d-46.473645825659446!3d-18.57253138253111!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ae8b970032c423%3A0xbd6c982f6a7318db!2sArena%20Bola%20de%20Ouro!5e0!3m2!1spt-BR!2sbr!4v1779109531080!5m2!1spt-BR!2sbr" width="600" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="faq">
+        <div class="container">
+            <div class="faq-header">
+                <h2>PERGUNTAS FREQUENTES</h2>
+                <p>Tire suas dúvidas sobre a Arena Bola de Ouro</p>
+            </div>
+
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3>Como faço para reservar um horário?</h3>
+                    <p>
+                        Você pode reservar diretamente pelo sistema na página
+                        "Agendar", escolhendo o campo, data e horário desejados.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Qual o tempo mínimo de reserva?</h3>
+                    <p>
+                        O tempo mínimo de reserva é de 1 hora, podendo ser
+                        estendido conforme a disponibilidade.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        © 2026 Arena Bola de Ouro - Todos os direitos reservados.
+    </footer>
+
+    <script src="contato.js"></script>
+
+</body>
+
+</html>
