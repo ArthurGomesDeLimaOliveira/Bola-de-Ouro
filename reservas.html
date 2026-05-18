@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gerenciar Reservas</title>
+  <link rel="stylesheet" href="reservas.css">
+</head>
+<body>
+
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-top">
+        <div class="logo">
+          <div class="logo-circle">AB</div>
+          <span>ADMIN</span>
+        </div>
+
+        <nav class="menu">
+          <a href="dashboard.html" class="menu-item">
+            Dashboard
+          </a>
+
+          <a href="#" class="menu-item active">
+            Reservas
+          </a>
+
+          <a href="relatorio.html" class="menu-item">
+            Relatórios
+          </a>
+        </nav>
+      </div>
+
+      <div class="sidebar-bottom">
+        <a href="home.html" class="menu-item">  Voltar ao Site </a>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+
+      <!-- TOPBAR -->
+      <header class="topbar">
+        <h2>Painel Administrativo</h2>
+        <span class="user">Administrador</span>
+      </header>
+
+      <!-- CONTENT -->
+      <section class="content">
+
+        <div class="title-area">
+          <h1>GERENCIAR RESERVAS</h1>
+          <p>Visualize e gerencie todas as reservas</p>
+        </div>
+
+        <!-- FILTER BAR -->
+        <div class="filter-box">
+          <div class="filter-row">
+
+            <div class="search">
+              <input type="text" placeholder="Buscar por campo, cliente ou data...">
+            </div>
+
+            <select class="select">
+              <option>Todos os campos</option>
+              <option>Campo Society</option>
+              <option>Campo Areia</option>
+            </select>
+
+            <select class="select">
+              <option>Todos</option>
+              <option>Ativos</option>
+              <option>Cancelados</option>
+            </select>
+
+          </div>
+        </div>
+
+        <!-- RESERVAS BOX -->
+        <div class="reservas-box">
+          <h3>Reservas (0)</h3>
+
+          <div class="reservas-content">
+            <!-- Aqui você pode colocar uma tabela futuramente -->
+          </div>
+        </div>
+
+      </section>
+    </main>
+
+  </div>
+
+</body>
+</html>

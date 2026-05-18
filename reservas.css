@@ -1,0 +1,221 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #eef2ef;
+}
+
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 230px;
+  background: linear-gradient(to bottom, #041f0c, #021608);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 18px 12px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 25px;
+}
+
+.logo-circle {
+  width: 35px;
+  height: 35px;
+  background: #0bdc4b;
+  border-radius: 50%;
+  color: #02210c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #dbe7dd;
+  padding: 10px 12px;
+  border-radius: 8px;
+  transition: 0.2s;
+  font-size: 14px;
+}
+
+.menu-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.menu-item.active {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.sidebar-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sair {
+  color: #ff6b6b;
+}
+
+/* MAIN */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* TOPBAR */
+.topbar {
+  background: #ffffff;
+  border-bottom: 1px solid #d7d7d7;
+  padding: 16px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.topbar h2 {
+  font-size: 16px;
+  font-weight: bold;
+  color: #222;
+}
+
+.topbar .user {
+  font-size: 13px;
+  color: #444;
+}
+
+/* CONTENT */
+.content {
+  padding: 20px 25px;
+}
+
+.title-area h1 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #111;
+}
+
+.title-area p {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* FILTER BOX */
+.filter-box {
+  background: #fff;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  padding: 14px;
+  margin-bottom: 15px;
+}
+
+.filter-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* SEARCH INPUT */
+.search {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  border: 1px solid #dcdcdc;
+  border-radius: 6px;
+  padding: 8px 10px;
+  background: #fff;
+}
+
+.search-icon {
+  font-size: 13px;
+  margin-right: 8px;
+  opacity: 0.7;
+}
+
+.search input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 12px;
+}
+
+/* SELECTS */
+.select {
+  border: 1px solid #dcdcdc;
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 12px;
+  outline: none;
+  background: white;
+  cursor: pointer;
+  width: 150px;
+}
+
+/* RESERVAS BOX */
+.reservas-box {
+  background: #fff;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  padding: 15px;
+  min-height: 320px;
+}
+
+.reservas-box h3 {
+  font-size: 13px;
+  font-weight: bold;
+  color: #111;
+  margin-bottom: 12px;
+}
+
+.reservas-content {
+  border: 1px solid #ececec;
+  border-radius: 6px;
+  height: 250px;
+  background: #fcfcfc;
+}
+
+/* RESPONSIVO */
+@media (max-width: 900px) {
+  .filter-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .select {
+    width: 100%;
+  }
+}
+
+@media (max-width: 700px) {
+  .sidebar {
+    display: none;
+  }
+}

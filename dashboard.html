@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Painel Administrativo</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-top">
+        <div class="logo">
+          <div class="logo-circle">AB</div>
+          <span>ADMIN</span>
+        </div>
+
+        <nav class="menu">
+          <a href="#" class="menu-item active">
+            Dashboard
+          </a>
+
+          <a href="reservas.html" class="menu-item">
+            Reservas
+          </a>
+
+          <a href="relatorio.html" class="menu-item">
+            Relatórios
+          </a>
+        </nav>
+      </div>
+
+      <div class="sidebar-bottom">
+        <a href="home.html" class="menu-item">
+          Voltar ao Site
+        </a>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+
+      <!-- CONTENT -->
+      <section class="content">
+        <div class="title-area">
+          <h1>DASHBOARD</h1>
+          <p>Visão geral do seu negócio</p>
+        </div>
+
+        <!-- CARDS -->
+        <div class="cards">
+          <div class="card">
+            <div class="card-top">
+              <p>Receita Hoje</p>
+              <span>$</span>
+            </div>
+            <h3>R$ 0,00</h3>
+            <small>0 reservas hoje</small>
+          </div>
+
+          <div class="card">
+            <div class="card-top">
+              <p>Receita Semanal</p>
+              <span>↗</span>
+            </div>
+            <h3>R$ 0,00</h3>
+            <small>Últimos 7 dias</small>
+          </div>
+
+          <div class="card">
+            <div class="card-top">
+              <p>Receita Mensal</p>
+            </div>
+            <h3>R$ 0,00</h3>
+            <small>Mês atual</small>
+          </div>
+
+          <div class="card">
+            <div class="card-top">
+              <p>Clientes Cadastrados</p>
+            </div>
+            <h3></h3>
+            <small>0 reservas no total</small>
+          </div>
+        </div>
+
+        <!-- CHARTS -->
+        <div class="grid-charts">
+          <div class="box">
+            <h4>Receita dos Últimos 7 Dias</h4>
+            <div class="fake-chart">
+              <div class="chart-line"></div>
+              <div class="chart-labels">
+                <span>ter.</span>
+                <span>qua.</span>
+                <span>qui.</span>
+                <span>sex.</span>
+                <span>sáb.</span>
+                <span>dom.</span>
+                <span>seg.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="box">
+            <h4>Reservas por Tipo de Campo</h4>
+            <div class="fake-chart center">
+              <p class="empty-text">Nenhum dado disponível</p>
+              <div class="legend">
+                <span><b>●</b> Society</span>
+                <span><b>●</b> Areia</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="box wide">
+          <h4>Reservas por Campo</h4>
+          <div class="fake-chart">
+            <div class="chart-line"></div>
+            <div class="chart-labels long">
+              <span>CS1</span>
+              <span>CS2</span>
+              <span>CS3</span>
+              <span>CS4</span>
+              <span>CS5</span>
+              <span>CS6</span>
+              <span>QA1</span>
+              <span>QA2</span>
+              <span>QA3</span>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="box wide">
+          <div class="recent-top">
+            <h4>Reservas Recentes</h4>
+            <a href="reservas.html" class="btn">Ver Reservas</a>
+          </div>
+
+          <p class="empty-text">Nenhuma reserva encontrada</p>
+        </div>
+
+      </section>
+    </main>
+
+  </div>
+
+</body>
+</html>

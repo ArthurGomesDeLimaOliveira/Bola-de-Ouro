@@ -1,0 +1,305 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #eef2ef;
+}
+
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 230px;
+  background: linear-gradient(to bottom, #041f0c, #021608);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 18px 12px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 25px;
+}
+
+.logo-circle {
+  width: 35px;
+  height: 35px;
+  background: #0bdc4b;
+  border-radius: 50%;
+  color: #02210c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #dbe7dd;
+  padding: 10px 12px;
+  border-radius: 8px;
+  transition: 0.2s;
+  font-size: 14px;
+}
+
+.menu-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.menu-item.active {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+
+.sidebar-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sair {
+  color: #ff6b6b;
+}
+
+/* MAIN */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* TOPBAR */
+.topbar {
+  background: #ffffff;
+  border-bottom: 1px solid #d7d7d7;
+  padding: 16px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.topbar h2 {
+  font-size: 16px;
+  font-weight: bold;
+  color: #222;
+}
+
+.topbar .user {
+  font-size: 13px;
+  color: #444;
+}
+
+/* CONTENT */
+.content {
+  padding: 20px 25px;
+}
+
+.title-area h1 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #111;
+}
+
+.title-area p {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* CARDS */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-bottom: 18px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  padding: 15px;
+  min-height: 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #444;
+}
+
+.card h3 {
+  font-size: 18px;
+  margin-top: 5px;
+  color: #111;
+}
+
+.card small {
+  font-size: 11px;
+  color: #777;
+}
+
+/* BOX */
+.grid-charts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.box {
+  background: white;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  padding: 15px;
+  min-height: 230px;
+}
+
+.box h4 {
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  color: #111;
+}
+
+.box.wide {
+  min-height: 180px;
+  margin-bottom: 15px;
+}
+
+/* FAKE CHART */
+.fake-chart {
+  width: 100%;
+  height: 170px;
+  border: 1px solid #ececec;
+  border-radius: 6px;
+  background: #fcfcfc;
+  position: relative;
+  padding: 10px;
+}
+
+.fake-chart.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.chart-line {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 35px;
+  height: 2px;
+  background: #444;
+}
+
+.chart-labels {
+  position: absolute;
+  bottom: 8px;
+  left: 10px;
+  right: 10px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #444;
+}
+
+.chart-labels.long span {
+  font-size: 10px;
+}
+
+.legend {
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+  display: flex;
+  gap: 15px;
+  font-size: 12px;
+  color: #111;
+}
+
+.legend span b {
+  color: black;
+}
+
+.legend.bottom {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.empty-text {
+  font-size: 12px;
+  color: #666;
+}
+
+/* RECENT */
+.recent-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn {
+  border: 1px solid #ccc;
+  background: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: 0.2s;
+}
+
+.btn:hover {
+  background: #f0f0f0;
+}
+
+/* RESPONSIVO */
+@media (max-width: 1100px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid-charts {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .sidebar {
+    display: none;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+}
