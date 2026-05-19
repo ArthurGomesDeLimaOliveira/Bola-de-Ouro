@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agendar Horário - Arena Bola de Ouro</title>
+  <link rel="stylesheet" href="cadastro.css"> <link rel="stylesheet" href="stylesheader.css">
+  <link rel="stylesheet" href="stylesfooter.css">
+  <style>
+    /* Ajustes específicos para a página de agendamento */
+    .card { width: 500px; }
+    .select-field {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #dcdcdc;
+      border-radius: 6px;
+      font-size: 13px;
+      background: white;
+      outline: none;
+    }
+    .info-preco {
+      background: #eaf1ff;
+      color: #2451c0;
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 15px;
+      text-align: center;
+      display: none;
+    }
+
+    /* Estilos do Dropdown do Usuário para manter o cabeçalho alinhado */
+    .user-menu-container {
+      position: relative;
+      display: inline-block;
+    }
+    .user-name-trigger {
+      font-weight: bold;
+      color: #333;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 8px 12px;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+    .user-name-trigger:hover {
+      background: #f0f0f0;
+    }
+    .dropdown-box {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 110%;
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      width: 160px;
+      box-shadow: 0px 4px 12px rgba(0,0,0,0.15);
+      z-index: 1000;
+      overflow: hidden;
+    }
+    .dropdown-box a {
+      display: block;
+      padding: 12px;
+      text-decoration: none;
+      font-size: 13px;
+      transition: background 0.2s;
+    }
+    .dropdown-box a:hover {
+      background: #f5f5f5;
+    }
+    .btn-admin-link {
+      color: #2451c0;
+      font-weight: bold;
+      border-bottom: 1px solid #eee;
+    }
+    .btn-logout-link {
+      color: #c62828;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="logo">
+      <div class="logo-circle"></div>
+      <h2>ARENA BOLA DE OURO</h2>
+    </div>
+    <nav class="menu">
+      <a href="home.html">Início</a>
+      <a href="campos.html">Campos</a>
+      <a href="agendar.html">Agendar</a>
+      <a href="contato.html">Contato</a>
+    </nav>
+    
+    <div class="header-buttons" id="authHeaderArea">
+      <div id="guestMenu">
+        <a href="login.html" class="btn-link" style="margin-right: 15px; text-decoration: none; color: #333;">Entrar</a>
+        <a href="cadastro.html" class="btn-green" style="text-decoration: none; padding: 8px 16px; background: #417742; color: white; border-radius: 4px;">Cadastrar</a>
+      </div>
+
+      <div id="userMenu" class="user-menu-container" style="display: none;">
+        <div class="user-name-trigger" id="btnTriggerDropdown">
+          <span id="txtNomeUsuario">Olá, Usuário</span>
+          <span style="font-size: 9px; color: #666;">▼</span>
+        </div>
+        
+        <div class="dropdown-box" id="dropdownMenu">
+          <a href="dashboard.html" id="linkAdmin" class="btn-admin-link" style="display: none;">Painel Admin</a>
+          <a href="#" id="btnSair" class="btn-logout-link">Sair / Logout</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="card">
+      <h3>RESERVAR UM CAMPO</h3>
+      <p class="subtitle">Escolha o campo, data e horário para a sua partida</p>
+
+      <form id="formAgendamento">
+        
+        <div class="input-group">
+          <label for="tipoCampo">Tipo de Campo</label>
+          <select id="tipoCampo" class="select-field" required>
+            <option value="" disabled selected>Selecione uma opção...</option>
+            <option value="Society" data-preco="120.00">Futebol Society (R$ 120,00/h)</option>
+            <option value="Areia" data-preco="90.00">Quadra de Areia / Beach Soccer (R$ 90,00/h)</option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label for="numeroCampo">Selecione a Quadra/Campo</label>
+          <select id="numeroCampo" class="select-field" required disabled>
+            <option value="" disabled selected>Selecione o tipo primeiro...</option>
+          </select>
+        </div>
+
+        <div class="info-preco" id="boxPreco">
+          Valor do Horário: R$ <span id="txtPreco">0,00</span>
+        </div>
+
+        <div class="input-group">
+          <label for="dataReserva">Data do Jogo</label>
+          <input type="date" id="dataReserva" required>
+        </div>
+
+        <div class="input-group">
+          <label for="horarioReserva">Horário disponível</label>
+          <select id="horarioReserva" class="select-field" required disabled>
+            <option value="" disabled selected>Selecione a data primeiro...</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn-green" style="width: 100%; border: none; cursor: pointer; padding: 12px;">
+          Confirmar Reserva
+        </button>
+
+      </form>
+    </div>
+  </main>
+
+  <footer class="footer2">
+    <div class="footer-container">
+      <div class="footer-col">
+        <h3>ARENA BOLA DE OURO</h3>
+        <p class="footer-text">A melhor estrutura para o seu futebol society e beach soccer.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="auth-header.js"></script>
+  <script src="agendar.js"></script>
+</body>
+</html>
