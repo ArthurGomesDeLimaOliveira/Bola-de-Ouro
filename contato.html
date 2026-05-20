@@ -12,41 +12,37 @@
 
 
     <link rel="stylesheet" href="contato.css">
+    <link rel="stylesheet" href="styleshome.css" />
+    <link rel="stylesheet" href="stylesfooter.css">
+    <link rel="stylesheet" href="stylesheader.css">
 </head>
 
 <body>
 
 
-    <header>
-        <div class="container navbar">
+    <header class="header">
+        <div class="logo">
             <div class="logo-circle"></div>
-            <div class="logo">ARENA BOLA DE OURO</div>
+            <h2>ARENA BOLA DE OURO</h2>
+        </div>
 
-            <nav>
-                <ul>
-                    <nav class="menu">
-                        <a href="home.html">Início</a>
-                        <a href="campos.html">Campos</a>
-                        <a href="agendar.html">Agendar</a>
-                        <a href="contato.html">Contato</a>
-                    </nav>
+        <nav class="menu">
+            <a href="home.html">Início</a>
+            <a href="campos.html">Campos</a>
+            <a href="agendar.html">Agendar</a>
+            <a href="contato.html" class="active">Contato</a>
+        </nav>
 
-                </ul>
-            </nav>
-
-            <div class="actions">
-                <a href="login.html" class="login">Entrar</a>
-                <a href="cadastrar.html" class="btn">Cadastrar</a>
-            </div>
+        <div class="header-buttons">
+            <a href="login.html" class="btn-link">Entrar</a>
+            <a href="cadastro.html" class="btn-green">Cadastrar</a>
         </div>
     </header>
 
 
-    <section class="hero">
-        <div class="container">
-            <h1>CONTATO</h1>
-            <p>Entre em contato conosco. Estamos prontos para atender você!</p>
-        </div>
+    <section class="banner">
+        <h1>CONTATO</h1>
+        <p>Entre em contato conosco. Estamos prontos para atender você!</p>
     </section>
 
 
@@ -131,7 +127,10 @@
                     </div>
 
                     <div class="map-placeholder">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.0334332837506!2d-46.473645825659446!3d-18.57253138253111!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ae8b970032c423%3A0xbd6c982f6a7318db!2sArena%20Bola%20de%20Ouro!5e0!3m2!1spt-BR!2sbr!4v1779109531080!5m2!1spt-BR!2sbr" width="600" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.0334332837506!2d-46.473645825659446!3d-18.57253138253111!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ae8b970032c423%3A0xbd6c982f6a7318db!2sArena%20Bola%20de%20Ouro!5e0!3m2!1spt-BR!2sbr!4v1779109531080!5m2!1spt-BR!2sbr"
+                            width="600" height="250" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
 
@@ -166,10 +165,10 @@
         </div>
     </section>
 
-    <footer>
-        © 2026 Arena Bola de Ouro - Todos os direitos reservados.
-    </footer>
+    <div id="footerInc"></div>
 
+
+    <script src="geral.js"></script>
     <script src="contato.js"></script>
 
 </body>

@@ -1,89 +1,27 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agendar Horário - Arena Bola de Ouro</title>
-  <link rel="stylesheet" href="cadastro.css"> <link rel="stylesheet" href="stylesheader.css">
-  <link rel="stylesheet" href="stylesfooter.css">
-  <style>
-    /* Ajustes específicos para a página de agendamento */
-    .card { width: 500px; }
-    .select-field {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #dcdcdc;
-      border-radius: 6px;
-      font-size: 13px;
-      background: white;
-      outline: none;
-    }
-    .info-preco {
-      background: #eaf1ff;
-      color: #2451c0;
-      padding: 10px;
-      border-radius: 6px;
-      font-size: 13px;
-      font-weight: bold;
-      margin-bottom: 15px;
-      text-align: center;
-      display: none;
-    }
 
-    /* Estilos do Dropdown do Usuário para manter o cabeçalho alinhado */
-    .user-menu-container {
-      position: relative;
-      display: inline-block;
-    }
-    .user-name-trigger {
-      font-weight: bold;
-      color: #333;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      padding: 8px 12px;
-      border-radius: 4px;
-      transition: background 0.2s;
-    }
-    .user-name-trigger:hover {
-      background: #f0f0f0;
-    }
-    .dropdown-box {
-      display: none;
-      position: absolute;
-      right: 0;
-      top: 110%;
-      background: white;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      width: 160px;
-      box-shadow: 0px 4px 12px rgba(0,0,0,0.15);
-      z-index: 1000;
-      overflow: hidden;
-    }
-    .dropdown-box a {
-      display: block;
-      padding: 12px;
-      text-decoration: none;
-      font-size: 13px;
-      transition: background 0.2s;
-    }
-    .dropdown-box a:hover {
-      background: #f5f5f5;
-    }
-    .btn-admin-link {
-      color: #2451c0;
-      font-weight: bold;
-      border-bottom: 1px solid #eee;
-    }
-    .btn-logout-link {
-      color: #c62828;
-    }
-  </style>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agendar Horário</title>
+
+  <link rel="stylesheet" href="agendamento.css">
+  <link rel="stylesheet" href="stylesfooter.css">
+  <link rel="stylesheet" href="styleshome.css" />
+
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
 </head>
+
+
 <body>
 
+  <!-- NAVBAR -->
   <header class="header">
     <div class="logo">
       <div class="logo-circle"></div>
@@ -92,14 +30,15 @@
     <nav class="menu">
       <a href="home.html">Início</a>
       <a href="campos.html">Campos</a>
-      <a href="agendar.html">Agendar</a>
+      <a href="agendar.html" class="active">Agendar</a>
       <a href="contato.html">Contato</a>
     </nav>
-    
+
     <div class="header-buttons" id="authHeaderArea">
       <div id="guestMenu">
         <a href="login.html" class="btn-link" style="margin-right: 15px; text-decoration: none; color: #333;">Entrar</a>
-        <a href="cadastro.html" class="btn-green" style="text-decoration: none; padding: 8px 16px; background: #417742; color: white; border-radius: 4px;">Cadastrar</a>
+        <a href="cadastro.html" class="btn-green"
+          style="text-decoration: none; padding: 8px 16px; background: #417742; color: white; border-radius: 4px;">Cadastrar</a>
       </div>
 
       <div id="userMenu" class="user-menu-container" style="display: none;">
@@ -107,7 +46,7 @@
           <span id="txtNomeUsuario">Olá, Usuário</span>
           <span style="font-size: 9px; color: #666;">▼</span>
         </div>
-        
+
         <div class="dropdown-box" id="dropdownMenu">
           <a href="dashboard.html" id="linkAdmin" class="btn-admin-link" style="display: none;">Painel Admin</a>
           <a href="#" id="btnSair" class="btn-logout-link">Sair / Logout</a>
@@ -116,65 +55,335 @@
     </div>
   </header>
 
-  <main class="main">
-    <div class="card">
-      <h3>RESERVAR UM CAMPO</h3>
-      <p class="subtitle">Escolha o campo, data e horário para a sua partida</p>
+  <!-- HERO -->
+  <section class="banner">
+    <h1>AGENDAR HORÁRIO</h1>
+    <p>Escolha o campo, data e horário para sua partida</p>
+  </section>
 
-      <form id="formAgendamento">
-        
-        <div class="input-group">
-          <label for="tipoCampo">Tipo de Campo</label>
-          <select id="tipoCampo" class="select-field" required>
-            <option value="" disabled selected>Selecione uma opção...</option>
-            <option value="Society" data-preco="120.00">Futebol Society (R$ 120,00/h)</option>
-            <option value="Areia" data-preco="90.00">Quadra de Areia / Beach Soccer (R$ 90,00/h)</option>
-          </select>
+
+  <!-- MAIN -->
+  <main class="container">
+
+    <!-- LEFT -->
+    <div class="left-side">
+
+      <button class="back-btn">← Voltar</button>
+
+      <h2>Escolha Data e Horário</h2>
+
+      <!-- SUBSTITUA APENAS ESTA PARTE DO SEU HTML -->
+      <!-- Troque a div abaixo:
+<div class="field-card">
+    ...
+</div>
+-->
+
+      <div class="custom-select">
+        <!-- Campo selecionado -->
+        <div class="select-selected" onclick="toggleOptions()">
+          <span id="selected-text">
+            <div class="selected-card">
+              <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=1200&auto=format&fit=crop">
+              <div class="selected-info">
+                <small>Society</small>
+                <strong>Campos</strong>
+                <!--parametro na url-->
+              </div>
+            </div>
+          </span>
+          <span class="arrow">▼</span>
         </div>
 
-        <div class="input-group">
-          <label for="numeroCampo">Selecione a Quadra/Campo</label>
-          <select id="numeroCampo" class="select-field" required disabled>
-            <option value="" disabled selected>Selecione o tipo primeiro...</option>
-          </select>
+        <!-- Lista de opções -->
+        <div class="select-options" id="select-options">
+
+          <script src="agendamento.js"></script>
+
+          <!-- OPÇÃO 1 -->
+          <div class="option" onclick="selectOption(this)" id="campo1">
+            <img src="imagens/fotohome.png" alt="Campo Society 1">
+            <div class="option-info">
+              <span class="categoria">Society</span>
+              <h3>Campo Society 1</h3>
+              <p>10-14 × jogadores</p>
+              <strong>R$ 150/hora</strong>
+            </div>
+          </div>
+
+          <!-- OPÇÃO 2 -->
+          <div class="option" onclick="selectOption(this)" id="campo2">
+            <img src="https://images.unsplash.com/photo-1546608235-3310a2494cdf?auto=format&fit=crop&w=1400&q=80"
+              alt="Campo Society 2">
+            <div class="option-info">
+              <span class="categoria">Society</span>
+              <h3>Campo Society 2</h3>
+              <p>10-14 × jogadores</p>
+              <strong>R$ 150/hora</strong>
+            </div>
+          </div>
+
+          <!-- OPÇÃO 3 -->
+          <div class="option" onclick="selectOption(this)" id="campo3">
+            <img src="https://images.unsplash.com/photo-1529900748604-07564a03e7a6?auto=format&fit=crop&w=1400&q=80"
+              alt="Campo Society 3">
+            <div class="option-info">
+              <span class="categoria">Society</span>
+              <h3>Campo Society 3</h3>
+              <p>10-14 × jogadores</p>
+              <strong>R$ 150/hora</strong>
+            </div>
+          </div>
+
+          <div class="option" onclick="selectOption(this)" id="campo4">
+            <img src="imagens/society.png" alt="Campo Society 2">
+            <div class="option-info">
+              <span class="categoria">Society</span>
+              <h3>Campo Society 4</h3>
+              <p>10-14 × jogadores</p>
+              <strong>R$ 150/hora</strong>
+            </div>
+          </div>
+
+          <div class="option" onclick="selectOption(this)" id="campo5">
+            <img src="https://images.unsplash.com/photo-1551958219-acbc608c6377?auto=format&fit=crop&w=1400&q=80"
+              alt="Campo Society 2">
+            <div class="option-info">
+              <span class="categoria">Society</span>
+              <h3>Campo Society 5</h3>
+              <p>10-14 × jogadores</p>
+              <strong>R$ 150/hora</strong>
+            </div>
+          </div>
+
+          <div class="option" onclick="selectOption(this)" id="campo6">
+            <img src="https://images.unsplash.com/photo-1459865264687-595d652de67e?q=80&w=1200&auto=format&fit=crop"
+              alt="Campo Society 2">
+            <div class="option-info">
+              <span class="categoria">Society</span>
+              <h3>Campo Society 6</h3>
+              <p>10-14 × jogadores</p>
+              <strong>R$ 150/hora</strong>
+            </div>
+          </div>
+
+          <div class="option" onclick="selectOption(this)" id="quadra1">
+            <img
+              src="https://terradomandu.com.br/wp-content/uploads/2023/10/FUVS-finaliza-quadras-de-areia-na-Unidade-Fatima-Foto-Divulgacao.jpeg"
+              alt="Campo Society 1">
+            <div class="option-info">
+              <span class="categoria">Society</span>
+              <h3>Quadra de Areia 1</h3>
+              <p>6-10 × jogadores</p>
+              <strong>R$ 120/hora</strong>
+            </div>
+          </div>
+
+          <div class="option" onclick="selectOption(this)" id="quadra2">
+            <img
+              src="https://tse4.mm.bing.net/th/id/OIP.XLkK9B9vP0mY3a3ObggjMQHaE7?r=0&cb=thfc1falcon&rs=1&pid=ImgDetMain&o=7&rm=3"
+              alt="Campo Society 2">
+            <div class="option-info">
+              <span class="categoria">Society</span>
+              <h3>Quadra de Areia 2</h3>
+              <p>6-10 × jogadores</p>
+              <strong>R$ 120/hora</strong>
+            </div>
+          </div>
+
+          <div class="option" onclick="selectOption(this)" id="quadra3">
+            <img src="https://th.bing.com/th/id/R.833a823723cebe37fd48a4a6b8378190?rik=l0pfaPWHv4I78w&pid=ImgRaw&r=0"
+              alt="Campo Society 2">
+            <div class="option-info">
+              <span class="categoria">Society</span>
+              <h3>Quadra de Areia 3</h3>
+              <p>6-10 × jogadores</p>
+              <strong>R$ 120/hora</strong>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- CALENDAR -->
+      <div class="calendar">
+
+        <div class="calendar-header">
+          <button>‹</button>
+          <h4>Março 2026</h4>
+          <button>›</button>
         </div>
 
-        <div class="info-preco" id="boxPreco">
-          Valor do Horário: R$ <span id="txtPreco">0,00</span>
+        <div class="weekdays">
+          <span>Dom</span>
+          <span>Seg</span>
+          <span>Ter</span>
+          <span>Qua</span>
+          <span>Qui</span>
+          <span>Sex</span>
+          <span>Sáb</span>
         </div>
 
-        <div class="input-group">
-          <label for="dataReserva">Data do Jogo</label>
-          <input type="date" id="dataReserva" required>
+        <div class="days">
+          <span class="disabled">1</span>
+          <span class="disabled">2</span>
+          <span class="disabled">3</span>
+          <span class="disabled">4</span>
+          <span class="disabled">5</span>
+          <span class="disabled">6</span>
+          <span class="disabled">7</span>
+
+          <span class="disabled">8</span>
+          <span class="disabled">9</span>
+          <span class="disabled">10</span>
+          <span class="disabled">11</span>
+          <span class="disabled">12</span>
+          <span class="disabled">13</span>
+          <span class="disabled">14</span>
+
+          <span class="disabled">15</span>
+          <span class="disabled">16</span>
+          <span class="disabled">17</span>
+          <span class="disabled">18</span>
+          <span class="disabled">19</span>
+          <span class=>20</span>
+
+          <span class=>21</span>
+
+          <span>22</span>
+          <span>23</span>
+          <span>24</span>
+          <span>25</span>
+          <span>26</span>
+          <span>27</span>
+          <span>28</span>
+
+          <span>29</span>
+          <span>30</span>
+          <span>31</span>
         </div>
 
-        <div class="input-group">
-          <label for="horarioReserva">Horário disponível</label>
-          <select id="horarioReserva" class="select-field" required disabled>
-            <option value="" disabled selected>Selecione a data primeiro...</option>
-          </select>
-        </div>
+      </div>
 
-        <button type="submit" class="btn-green" style="width: 100%; border: none; cursor: pointer; padding: 12px;">
-          Confirmar Reserva
-        </button>
-
-      </form>
     </div>
+
+    <!-- RIGHT -->
+    <div class="right-side">
+
+      <h3>Horários Disponíveis</h3>
+
+      <p class="subtitle">
+        Horários para quinta-feira, 26 de março
+      </p>
+
+      <div class="times">
+
+        <button class="time">08:00</button>
+        <button class="time">09:00</button>
+        <button class="time">10:00</button>
+        <button class="time">11:00</button>
+
+        <button class="time">12:00</button>
+        <button class="time">13:00</button>
+        <button class="time">14:00</button>
+        <button class="time">15:00</button>
+
+        <button class="time">16:00</button>
+        <button class="time">17:00</button>
+        <button class="time">18:00</button>
+        <button class="time">19:00</button>
+
+        <button class="time">20:00</button>
+        <button class="time">21:00</button>
+        <button class="time">22:00</button>
+
+      </div>
+
+      <button class="continue-btn">
+        Continuar →
+      </button>
+
+    </div>
+
   </main>
 
-  <footer class="footer2">
-    <div class="footer-container">
-      <div class="footer-col">
-        <h3>ARENA BOLA DE OURO</h3>
-        <p class="footer-text">A melhor estrutura para o seu futebol society e beach soccer.</p>
-      </div>
-    </div>
-  </footer>
+  <!-- CONFIRMATION -->
+  <section class="confirmation">
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="supabase-config.js"></script>
-  <script src="auth-header.js"></script>
-  <script src="agendar.js"></script>
+    <div class="check">✓</div>
+
+    <h2>RESERVA CONFIRMADA!</h2>
+
+    <p>
+      Sua reserva foi realizada com sucesso.
+      Você receberá um e-mail de confirmação.
+    </p>
+
+    <div class="confirmation-buttons">
+      <button class="green-btn">Ver Minhas Reservas</button>
+      <a href="home.html"><button class="white-btn">
+          Voltar ao início</button></a>
+
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+  <div id="footerInc"></div>
+
+  <script src="geral.js"></script>
+  <script src="agendamento.js"></script>
+
+  <script>
+    const queryString = window.location.search;
+
+    // 2. Cria um objeto URLSearchParams
+    const parametros = new URLSearchParams(queryString);
+
+    // 3. Captura o valor de um parâmetro específico
+    const campo = parametros.get('campo');
+    var element = null;
+
+    //atribui a div especificada
+    switch (campo) {
+      case "1":
+        element = document.getElementById("campo1");
+        break;
+      case "2":
+        element = document.getElementById("campo2");
+        break;
+      case "3":
+        element = document.getElementById("campo3");
+        break;
+      case "4":
+        element = document.getElementById("campo4");
+        break;
+      case "5":
+        element = document.getElementById("campo5");
+        break;
+      case "6":
+        element = document.getElementById("campo6");
+        break;
+
+    }
+    const quadra = parametros.get('quadra');
+
+
+    switch (quadra) {
+      case "1":
+        element = document.getElementById("quadra1");
+        break;
+      case "2":
+        element = document.getElementById("quadra2");
+        break;
+      case "3":
+        element = document.getElementById("quadra3");
+        break;
+    }
+    //altera o option
+    selectOption(element);
+
+  </script>
 </body>
+
 </html>
