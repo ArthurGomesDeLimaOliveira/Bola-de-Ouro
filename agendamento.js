@@ -37,20 +37,24 @@ function toggleOptions() {
 window.toggleOptions = toggleOptions;
 
 function selectOption(option) {
-  if (!option) return; 
-  
+  if (!option) return;
+
   const img = option.querySelector("img").src;
   const categoria = option.querySelector(".categoria").textContent;
   const titulo = option.querySelector("h3").textContent;
-  
+  const quantidadej = option.querySelector("p").textContent;
+  const valorh = option.querySelector("strong").textContent;
+
   selected.innerHTML = `
-      <div class="selected-card">
-          <img src="${img}">
-          <div class="selected-info">
-            <small>${categoria}</small>
-            <strong>${titulo}</strong>
-          </div>
-      </div>
+      <div class="option-info selected-card">
+            <img src="${img}">
+            <div class="option-info">
+              <span class="categoria">${categoria}</span>
+              <h3>${titulo}</h3>
+              <p>${quantidadej}</p>
+              <strong>${valorh}</strong>
+            </div>
+        </div>
   `;
 
   options.classList.remove("show");
@@ -84,7 +88,7 @@ const mesesNomes = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", 
 
 function renderizarCalendario() {
   if (!diasCalendario) return; // Evita erro se o HTML não estiver pronto
-  
+
   diasCalendario.innerHTML = ""; // Limpa os dias antigos
   if (mesAnoTexto) mesAnoTexto.textContent = `${mesesNomes[mesExibicao]} ${anoExibicao}`;
 
@@ -119,11 +123,11 @@ function renderizarCalendario() {
     } else {
       // Se for uma data válida (hoje ou futuro), adiciona o evento de clique
       spanDia.addEventListener("click", () => {
-        
+
         // --- TRAVA: Verificar se o campo foi escolhido primeiro ---
         if (!campoSelecionado) {
           alert("Por favor, selecione um campo na lista acima antes de escolher a data.");
-          return; 
+          return;
         }
 
         // Limpa seleção antiga e marca o novo dia
@@ -206,7 +210,7 @@ async function verificarDisponibilidade() {
   // Aplica o bloqueio visual nos botões
   botoesTempo.forEach(btn => {
     const horaDoBotao = btn.textContent;
-    
+
     // Limpa estados anteriores
     btn.classList.remove("disabled");
     btn.disabled = false;
@@ -226,7 +230,7 @@ async function verificarDisponibilidade() {
 // Clique num horário disponível
 botoesTempo.forEach((btn) => {
   btn.addEventListener("click", () => {
-    
+
     // --- TRAVAS: Campo e Data ---
     if (!campoSelecionado) {
       alert("Por favor, selecione um campo primeiro.");
@@ -241,7 +245,7 @@ botoesTempo.forEach((btn) => {
 
     botoesTempo.forEach((item) => item.classList.remove("active"));
     btn.classList.add("active");
-    
+
     // Formata para o banco (HH:MM:SS)
     horarioSelecionado = btn.textContent + ":00";
   });
@@ -252,7 +256,7 @@ botoesTempo.forEach((btn) => {
 // ==========================================
 if (btnContinuar) {
   btnContinuar.addEventListener("click", async () => {
-    
+
     // Validações separadas para guiar o usuário
     if (!campoSelecionado) {
       alert("Você esqueceu de escolher o campo! Selecione um campo antes de continuar.");
@@ -287,7 +291,7 @@ if (btnContinuar) {
       // Soma o total que o cliente deve
       const totalDevendo = pendencias.reduce((acc, curr) => acc + curr.taxa_cancelamento, 0);
       const devendoFormatado = totalDevendo.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-      
+
       alert(`⚠️ BLOQUEADO! Você possui uma taxa de cancelamento pendente no valor de ${devendoFormatado}.\n\nPara agendar novos horários, por favor, entre em contato com a administração para realizar o acerto.`);
       return; // Impede a reserva!
     }
@@ -341,7 +345,7 @@ if (btnContinuar) {
     document.querySelector("main.container").style.display = "none";
     const bannerSection = document.querySelector(".banner");
     if (bannerSection) bannerSection.style.display = "none";
-    
+
     if (confirmationScreen) {
       confirmationScreen.style.display = "block";
     }

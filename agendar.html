@@ -293,7 +293,7 @@
   </section>
 
   <!-- FOOTER -->
-<div id="footerInc"></div>
+  <div id="footerInc"></div>
 
   <script src="geral.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -306,7 +306,7 @@
     const parametros = new URLSearchParams(queryString);
     const campoUrl = parametros.get('campo');
     const quadraUrl = parametros.get('quadra');
-    
+
     let element = null;
 
     if (campoUrl) {
@@ -315,11 +315,12 @@
       element = document.getElementById("quadra" + quadraUrl);
     }
 
-    if (element) {
+   // if (element) {
       // Chama a função que criamos no agendamento.js
       selectOption(element);
-    }
+//    }
   </script>
+
 </body>
 
 </html>
