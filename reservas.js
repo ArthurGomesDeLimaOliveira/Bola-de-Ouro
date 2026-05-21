@@ -37,11 +37,23 @@ function renderizarReservas(lista) {
     const horaFormatada = res.horario_reserva.substring(0, 5) + 'h';
     const valorFormatado = parseFloat(res.valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
     
-    // Define a classe CSS do estado
-    const statusClass = res.status === 'Ativo' ? 'status ativo' : 'status cancelado';
+    // --- LÓGICA DE EXIBIÇÃO DE TAXAS E MULTAS (VISÃO DO ADMIN) ---
+    let infoTaxa = '';
+    if (res.status === 'Cancelado' && res.taxa_cancelamento > 0) {
+      if (res.taxa_paga) {
+        infoTaxa = `<div style="font-size: 11px; color: green; font-weight: bold; margin-top: 5px;">✅ Taxa Paga (R$ ${res.taxa_cancelamento.toFixed(2)})</div>`;
+      } else {
+        infoTaxa = `
+          <div style="font-size: 11px; color: #c62828; font-weight: bold; margin-top: 5px; border: 1px solid red; padding: 4px; border-radius: 4px;">
+            ⚠️ DEVENDO: R$ ${res.taxa_cancelamento.toFixed(2)}
+            <button onclick="marcarTaxaPaga('${res.id}')" style="background: green; color: white; border: none; padding: 3px 6px; cursor: pointer; margin-left: 5px; border-radius: 3px;">Quitar</button>
+          </div>
+        `;
+      }
+    }
 
     const cardReserva = document.createElement('div');
-    cardReserva.className = 'reserva-item'; // Pode adaptar conforme as suas classes de estilo
+    cardReserva.className = 'reserva-item';
     cardReserva.style = 'background: #fff; padding: 15px; border-radius: 6px; margin-top: 10px; border: 1px solid #e2e2e2; display: flex; justify-content: space-between; align-items: center;';
     
     cardReserva.innerHTML = `
@@ -54,12 +66,13 @@ function renderizarReservas(lista) {
         <div style="font-size: 12px; color: #1f8f3d; margin-top: 3px; font-weight: bold;">
           Valor: ${valorFormatado}
         </div>
+        ${infoTaxa}
       </div>
       <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 8px;">
         <span style="padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; background: ${res.status === 'Ativo' ? '#eefaf1' : '#ffebee'}; color: ${res.status === 'Ativo' ? '#1f8f3d' : '#c62828'};">
           ${res.status.toUpperCase()}
         </span>
-        ${res.status === 'Ativo' ? `<button onclick="cancelarReserva('${res.id}')" style="background: #c62828; color: white; border: none; padding: 4px 8px; border-radius: 4px; font-size: 11px; cursor: pointer;">Cancelar</button>` : ''}
+        ${res.status === 'Ativo' ? `<button onclick="cancelarReserva('${res.id}')" style="background: #c62828; color: white; border: none; padding: 4px 8px; border-radius: 4px; font-size: 11px; cursor: pointer;">Cancelar Admin</button>` : ''}
       </div>
     `;
     
@@ -67,7 +80,7 @@ function renderizarReservas(lista) {
   });
 }
 
-// Função para cancelar uma reserva
+// Função para o Admin cancelar uma reserva ativamente
 window.cancelarReserva = async function(id) {
   if (!confirm('Tem certeza de que deseja cancelar esta reserva?')) return;
 
@@ -81,6 +94,23 @@ window.cancelarReserva = async function(id) {
   } else {
     alert('Reserva cancelada com sucesso!');
     buscarReservas(); // Atualiza a lista na tela
+  }
+};
+
+// Função exclusiva do Admin para quitar taxas de clientes inadimplentes
+window.marcarTaxaPaga = async function(id) {
+  if (!confirm('Deseja confirmar o pagamento desta taxa? Isso irá liberar o cliente para fazer novas reservas.')) return;
+
+  const { error } = await _supabase
+    .from('reservas')
+    .update({ taxa_paga: true })
+    .eq('id', id);
+
+  if (error) {
+    alert('Erro ao atualizar: ' + error.message);
+  } else {
+    alert('Taxa quitada! Cliente liberado.');
+    buscarReservas(); // Atualiza a tela imediatamente para remover o aviso de dívida
   }
 };
 

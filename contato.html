@@ -33,9 +33,23 @@
             <a href="contato.html" class="active">Contato</a>
         </nav>
 
-        <div class="header-buttons">
-            <a href="login.html" class="btn-link">Entrar</a>
-            <a href="cadastro.html" class="btn-green">Cadastrar</a>
+        <div class="header-buttons" id="authHeaderArea">
+            <div id="guestMenu">
+                <a href="login.html" class="btn-link" style="margin-right: 15px; text-decoration: none; color: #333;">Entrar</a>
+                <a href="cadastro.html" class="btn-green" style="text-decoration: none; padding: 8px 16px; background: #417742; color: white; border-radius: 4px;">Cadastrar</a>
+            </div>
+
+            <div id="userMenu" class="user-menu-container" style="display: none;">
+                <div class="user-name-trigger" id="btnTriggerDropdown">
+                    <span id="txtNomeUsuario">Olá, Usuário</span>
+                    <span style="font-size: 9px; color: #666;">▼</span>
+                </div>
+                
+                <div class="dropdown-box" id="dropdownMenu">
+                    <a href="dashboard.html" id="linkAdmin" class="btn-admin-link" style="display: none;">Painel Admin</a>
+                    <a href="#" id="btnSair" class="btn-logout-link">Sair / Logout</a>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -167,9 +181,11 @@
 
     <div id="footerInc"></div>
 
-
-    <script src="geral.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="auth-header.js"></script>
     <script src="contato.js"></script>
+    <script src="geral.js"></script>
 
 </body>
 

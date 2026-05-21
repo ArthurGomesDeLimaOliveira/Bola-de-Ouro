@@ -23,10 +23,16 @@ async function inicializarMenuCabecalho() {
       const primeiroNome = nomeCompleto.split(' ')[0];
       txtNomeUsuario.textContent = `Olá, ${primeiroNome}`;
 
-      // 3. Verifica se é Administrador para liberar o Painel Admin
+      // 3. Verifica o nível de acesso para liberar o link correto no dropdown
       const nivelAcesso = user.user_metadata?.role || 'client';
       if (nivelAcesso === 'admin') {
+        linkAdmin.textContent = "Painel Admin";
+        linkAdmin.href = "dashboard.html";
         linkAdmin.style.display = 'block';
+      } else {
+        linkAdmin.textContent = "Minhas Reservas";
+        linkAdmin.href = "minhas-reservas.html";
+        linkAdmin.style.display = 'block'; // Mostra o link para o cliente também, mas apontando para as reservas dele!
       }
 
       // 4. Mecanismo de abrir/fechar o Dropdown

@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="agendamento.css">
   <link rel="stylesheet" href="stylesfooter.css">
   <link rel="stylesheet" href="styleshome.css" />
+  <link rel="stylesheet" href="stylesheader.css">
 
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -98,7 +99,6 @@
         <!-- Lista de opções -->
         <div class="select-options" id="select-options">
 
-          <script src="agendamento.js"></script>
 
           <!-- OPÇÃO 1 -->
           <div class="option" onclick="selectOption(this)" id="campo1">
@@ -209,9 +209,9 @@
       <div class="calendar">
 
         <div class="calendar-header">
-          <button>‹</button>
-          <h4>Março 2026</h4>
-          <button>›</button>
+          <button id="btn-mes-anterior">‹</button>
+          <h4 id="mes-ano-texto">Mês Ano</h4>
+          <button id="btn-mes-proximo">›</button>
         </div>
 
         <div class="weekdays">
@@ -224,43 +224,7 @@
           <span>Sáb</span>
         </div>
 
-        <div class="days">
-          <span class="disabled">1</span>
-          <span class="disabled">2</span>
-          <span class="disabled">3</span>
-          <span class="disabled">4</span>
-          <span class="disabled">5</span>
-          <span class="disabled">6</span>
-          <span class="disabled">7</span>
-
-          <span class="disabled">8</span>
-          <span class="disabled">9</span>
-          <span class="disabled">10</span>
-          <span class="disabled">11</span>
-          <span class="disabled">12</span>
-          <span class="disabled">13</span>
-          <span class="disabled">14</span>
-
-          <span class="disabled">15</span>
-          <span class="disabled">16</span>
-          <span class="disabled">17</span>
-          <span class="disabled">18</span>
-          <span class="disabled">19</span>
-          <span class=>20</span>
-
-          <span class=>21</span>
-
-          <span>22</span>
-          <span>23</span>
-          <span>24</span>
-          <span>25</span>
-          <span>26</span>
-          <span>27</span>
-          <span>28</span>
-
-          <span>29</span>
-          <span>30</span>
-          <span>31</span>
+        <div class="days" id="dias-calendario">
         </div>
 
       </div>
@@ -272,8 +236,8 @@
 
       <h3>Horários Disponíveis</h3>
 
-      <p class="subtitle">
-        Horários para quinta-feira, 26 de março
+      <p class="subtitle" id="texto-data-selecionada">
+        Selecione uma data no calendário ao lado
       </p>
 
       <div class="times">
@@ -320,7 +284,7 @@
     </p>
 
     <div class="confirmation-buttons">
-      <button class="green-btn">Ver Minhas Reservas</button>
+      <button class="green-btn" onclick="window.location.href='minhas-reservas.html'">Ver Minhas Reservas</button>
       <a href="home.html"><button class="white-btn">
           Voltar ao início</button></a>
 
@@ -329,60 +293,32 @@
   </section>
 
   <!-- FOOTER -->
-  <div id="footerInc"></div>
+<div id="footerInc"></div>
 
   <script src="geral.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="auth-header.js"></script>
   <script src="agendamento.js"></script>
 
   <script>
     const queryString = window.location.search;
-
-    // 2. Cria um objeto URLSearchParams
     const parametros = new URLSearchParams(queryString);
+    const campoUrl = parametros.get('campo');
+    const quadraUrl = parametros.get('quadra');
+    
+    let element = null;
 
-    // 3. Captura o valor de um parâmetro específico
-    const campo = parametros.get('campo');
-    var element = null;
-
-    //atribui a div especificada
-    switch (campo) {
-      case "1":
-        element = document.getElementById("campo1");
-        break;
-      case "2":
-        element = document.getElementById("campo2");
-        break;
-      case "3":
-        element = document.getElementById("campo3");
-        break;
-      case "4":
-        element = document.getElementById("campo4");
-        break;
-      case "5":
-        element = document.getElementById("campo5");
-        break;
-      case "6":
-        element = document.getElementById("campo6");
-        break;
-
+    if (campoUrl) {
+      element = document.getElementById("campo" + campoUrl);
+    } else if (quadraUrl) {
+      element = document.getElementById("quadra" + quadraUrl);
     }
-    const quadra = parametros.get('quadra');
 
-
-    switch (quadra) {
-      case "1":
-        element = document.getElementById("quadra1");
-        break;
-      case "2":
-        element = document.getElementById("quadra2");
-        break;
-      case "3":
-        element = document.getElementById("quadra3");
-        break;
+    if (element) {
+      // Chama a função que criamos no agendamento.js
+      selectOption(element);
     }
-    //altera o option
-    selectOption(element);
-
   </script>
 </body>
 

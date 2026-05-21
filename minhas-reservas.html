@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Minhas Reservas - Arena Bola de Ouro</title>
+  <link rel="stylesheet" href="reservas.css"> <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+</head>
+<body>
+
+  <div class="layout">
+
+    <aside class="sidebar" style="background: linear-gradient(to bottom, #093316, #031c0b);"> <div class="sidebar-top">
+        <div class="logo">
+          <div class="logo-circle" style="background: #0bdc4b; color: #02210c;">⚽</div>
+          <span>ATLETA</span>
+        </div>
+
+        <nav class="menu">
+          <a href="#" class="menu-item active">
+            Minhas Reservas
+          </a>
+          <a href="agendar.html" class="menu-item">
+            Novo Agendamento
+          </a>
+        </nav>
+      </div>
+
+      <div class="sidebar-bottom">
+        <a href="home.html" class="menu-item">
+          Voltar ao Site
+        </a>
+      </div>
+    </aside>
+
+    <main class="main">
+
+      <header class="topbar">
+        <h2>Área do Cliente</h2>
+        <span class="user" id="nome-usuario-topbar">Carregando...</span>
+      </header>
+
+      <section class="content">
+
+        <div class="title-area">
+          <h1>MEUS AGENDAMENTOS</h1>
+          <p>Gerencie seus horários e acompanhe o status das suas partidas</p>
+        </div>
+
+        <div class="filter-box">
+          <div class="filter-row">
+
+            <div class="search">
+              <input type="text" id="busca-reserva-cliente" placeholder="Buscar por campo ou data (AAAA-MM-DD)...">
+            </div>
+
+            <select class="select" id="filtro-status-cliente">
+              <option value="Todos">Todos os status</option>
+              <option value="Ativos">Ativos</option>
+              <option value="Cancelados">Cancelados</option>
+            </select>
+
+          </div>
+        </div>
+
+        <div class="reservas-box" id="lista-reservas-cliente">
+          <h3>Minhas Reservas (0)</h3>
+          </div>
+
+      </section>
+    </main>
+
+  </div>
+
+  <script src="minhas-reservas.js"></script>
+</body>
+</html>

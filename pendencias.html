@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pendências - Painel Admin</title>
+  <link rel="stylesheet" href="reservas.css"> <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="auth-check.js"></script>
+</head>
+<body>
+
+  <div class="layout">
+
+    <aside class="sidebar">
+      <div class="sidebar-top">
+        <div class="logo">
+          <div class="logo-circle">AB</div>
+          <span>ADMIN</span>
+        </div>
+
+        <nav class="menu">
+          <a href="dashboard.html" class="menu-item">Dashboard</a>
+          <a href="reservas.html" class="menu-item">Reservas</a>
+          <a href="pendencias.html" class="menu-item active">Pendências</a> <a href="relatorio.html" class="menu-item">Relatórios</a>
+        </nav>
+      </div>
+
+      <div class="sidebar-bottom">
+        <a href="home.html" class="menu-item">Voltar ao Site</a>
+      </div>
+    </aside>
+
+    <main class="main">
+
+      <header class="topbar">
+        <h2>Painel Administrativo</h2>
+        <span class="user">Administrador</span>
+      </header>
+
+      <section class="content">
+
+        <div class="title-area">
+          <h1 style="color: #c62828;">CLIENTES COM PENDÊNCIAS</h1>
+          <p>Gerencie usuários bloqueados por taxas de cancelamento não pagas</p>
+        </div>
+
+        <div class="filter-box">
+          <div class="filter-row">
+            <div class="search">
+              <input type="text" id="busca-pendencia" placeholder="Buscar por nome do cliente ou telefone...">
+            </div>
+          </div>
+        </div>
+
+        <div class="reservas-box" id="lista-pendencias">
+          <h3>Carregando...</h3>
+        </div>
+
+      </section>
+    </main>
+
+  </div>
+
+  <script src="pendencias.js"></script>
+
+</body>
+</html>
