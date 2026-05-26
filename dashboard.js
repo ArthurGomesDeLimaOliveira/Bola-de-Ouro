@@ -7,7 +7,6 @@ function formatarDataBanco(data) {
 }
 
 async function carregarDadosDashboard() {
-  // 1. Busca todas as reservas no banco
   const { data: reservas, error } = await _supabase
     .from('reservas')
     .select('*')
@@ -18,20 +17,17 @@ async function carregarDadosDashboard() {
     return;
   }
 
-  // 2. Filtra apenas as reservas ativas para os cálculos financeiros
   const reservasAtivas = reservas.filter(r => r.status === 'Ativo');
 
-  // --- DATAS PARA CÁLCULO ---
   const hoje = new Date();
   const dataHojeStr = formatarDataBanco(hoje);
   
   const seteDiasAtras = new Date();
-  seteDiasAtras.setDate(hoje.getDate() - 6); // Hoje + 6 dias anteriores = 7 dias
+  seteDiasAtras.setDate(hoje.getDate() - 6); 
   
   const mesAtual = String(hoje.getMonth() + 1).padStart(2, '0');
   const anoAtual = hoje.getFullYear();
 
-  // --- CÁLCULO DE MÉTRICAS (CARDS DO TOPO) ---
   let receitaHoje = 0, qtdHoje = 0;
   let receitaSemana = 0, qtdSemana = 0;
   let receitaMes = 0, qtdMes = 0;
@@ -39,21 +35,19 @@ async function carregarDadosDashboard() {
   reservasAtivas.forEach(res => {
     const valor = parseFloat(res.valor);
     const dataRes = res.data_reserva;
-    const dataObj = new Date(`${dataRes}T00:00:00`); // Corrige fuso horário
+    const dataObj = new Date(`${dataRes}T00:00:00`);
 
-    // Hoje
+
     if (dataRes === dataHojeStr) {
       receitaHoje += valor;
       qtdHoje++;
     }
 
-    // Últimos 7 dias (incluindo hoje)
     if (dataObj >= seteDiasAtras && dataObj <= hoje) {
       receitaSemana += valor;
       qtdSemana++;
     }
 
-    // Mês atual
     const mesRes = dataRes.split('-')[1];
     const anoRes = dataRes.split('-')[0];
     if (mesRes === mesAtual && anoRes == anoAtual) {
@@ -62,10 +56,8 @@ async function carregarDadosDashboard() {
     }
   });
 
-  // Clientes Únicos (Conta telefones únicos para descobrir quantos clientes reais você tem)
   const clientesUnicos = new Set(reservas.map(r => r.telefone_cliente)).size;
 
-  // Atualiza o HTML dos Cards
   document.getElementById('metric-hoje-valor').textContent = receitaHoje.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
   document.getElementById('metric-hoje-qtd').textContent = `${qtdHoje} reservas hoje`;
 
@@ -79,11 +71,10 @@ async function carregarDadosDashboard() {
   document.getElementById('metric-clientes-qtd').textContent = `${reservas.length} cadastros de jogos totais`;
 
 
-  // --- PREENCHER RESERVAS RECENTES ---
   const listaRecentes = document.getElementById('lista-recentes');
   listaRecentes.innerHTML = '';
   
-  // Pega as 5 mais recém inseridas no sistema
+
   const ultimas5 = reservas.slice(0, 5); 
   
   if (ultimas5.length === 0) {
@@ -106,21 +97,15 @@ async function carregarDadosDashboard() {
     });
   }
 
-  // ==========================================
-  // GRÁFICOS (CHART.JS)
-  // ==========================================
 
-  // 1. DADOS PARA O GRÁFICO DE LINHA (Receita dos últimos 7 dias)
   const labels7Dias = [];
   const dados7Dias = [];
   
-  // Cria um array vazio para os últimos 7 dias
   for (let i = 6; i >= 0; i--) {
     const d = new Date();
     d.setDate(hoje.getDate() - i);
     labels7Dias.push(d.toLocaleDateString('pt-BR', { weekday: 'short', day: 'numeric' }));
-    
-    // Calcula a receita exata daquele dia específico
+
     const dataAlvoStr = formatarDataBanco(d);
     const receitaDoDia = reservasAtivas
       .filter(r => r.data_reserva === dataAlvoStr)
@@ -140,7 +125,7 @@ async function carregarDadosDashboard() {
         backgroundColor: 'rgba(31, 143, 61, 0.1)',
         borderWidth: 3,
         fill: true,
-        tension: 0.3 // Deixa a linha suave/curvada
+        tension: 0.3
       }]
     },
     options: {
@@ -151,7 +136,6 @@ async function carregarDadosDashboard() {
   });
 
 
-  // 2. DADOS PARA O GRÁFICO DE PIZZA (Society vs Areia)
   const qtdSociety = reservasAtivas.filter(r => r.tipo_campo === 'Society').length;
   const qtdAreia = reservasAtivas.filter(r => r.tipo_campo === 'Areia').length;
 
@@ -177,13 +161,11 @@ async function carregarDadosDashboard() {
   });
 
 
-  // 3. DADOS PARA O GRÁFICO DE BARRAS (Reservas por Campo)
   const contagemCampos = {};
   reservasAtivas.forEach(r => {
     contagemCampos[r.numero_campo] = (contagemCampos[r.numero_campo] || 0) + 1;
   });
 
-  // Ordena do campo mais jogado para o menos jogado
   const camposOrdenados = Object.keys(contagemCampos).sort((a, b) => contagemCampos[b] - contagemCampos[a]);
   const valoresCampos = camposOrdenados.map(campo => contagemCampos[campo]);
 
@@ -209,5 +191,4 @@ async function carregarDadosDashboard() {
   });
 }
 
-// Inicia a renderização quando o arquivo carrega
 document.addEventListener('DOMContentLoaded', carregarDadosDashboard);

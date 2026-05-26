@@ -5,9 +5,7 @@ const nomeUsuarioTopbar = document.getElementById('nome-usuario-topbar');
 
 let minhasReservas = [];
 
-// Função que inicia o painel do cliente
 async function inicializarPainelCliente() {
-  // 1. Verifica se o usuário está autenticado
   const { data: { user }, error: authError } = await _supabase.auth.getUser();
 
   if (authError || !user) {
@@ -16,12 +14,9 @@ async function inicializarPainelCliente() {
     return;
   }
 
-  // Insere o nome completo do usuário no topo da tela
   const nomeCompleto = user.user_metadata?.full_name || "Jogador";
   nomeUsuarioTopbar.textContent = nomeCompleto;
 
-  // 2. Busca as reservas direto do Supabase
-  // OBS: Graças ao RLS (Segurança) que ativamos, o comando abaixo traz AUTOMATICAMENTE apenas as reservas dele!
   const { data, error } = await _supabase
     .from('reservas')
     .select('*')
@@ -37,7 +32,6 @@ async function inicializarPainelCliente() {
   renderizarReservasCliente(minhasReservas);
 }
 
-// Renderiza os itens na tela utilizando a mesma estrutura visual
 function renderizarReservasCliente(lista) {
   reservasLista.innerHTML = `<h3>Minhas Reservas (${lista.length})</h3>`;
 
@@ -77,13 +71,10 @@ function renderizarReservasCliente(lista) {
     reservasLista.appendChild(cardReserva);
   });
 }
-// Função para o próprio cliente cancelar seu horário com cálculo de multa
 window.cancelarAgendamentoCliente = async function(id) {
-  // 1. Busca os dados completos da reserva para fazer os cálculos
   const reserva = minhasReservas.find(r => r.id === id);
   if (!reserva) return;
 
-  // 2. Calcula a diferença de tempo (Horas até o jogo)
   const stringDataHoraJogo = `${reserva.data_reserva}T${reserva.horario_reserva}-03:00`; // Fuso de Brasília
   const dataDoJogo = new Date(stringDataHoraJogo);
   const agora = new Date();
@@ -96,21 +87,20 @@ window.cancelarAgendamentoCliente = async function(id) {
     return;
   }
 
-  // 3. Aplica a Regra de Negócio (Multas)
   let percentualMulta = 0;
   let mensagemMulta = "";
 
   if (horasFaltantes >= 8) {
-    percentualMulta = 0; // Mais de 8h = Grátis
+    percentualMulta = 0; 
     mensagemMulta = "Como você está cancelando com mais de 8 horas de antecedência, NÃO haverá taxas.";
   } else if (horasFaltantes >= 4) {
-    percentualMulta = 0.25; // Entre 4h e 8h = 25%
+    percentualMulta = 0.25; 
     mensagemMulta = "Atenção: Cancelamentos entre 4h e 8h antes do jogo possuem taxa de 25%.";
   } else if (horasFaltantes >= 2) {
-    percentualMulta = 0.50; // Entre 2h e 4h = 50%
+    percentualMulta = 0.50; 
     mensagemMulta = "Atenção: Cancelamentos entre 2h e 4h antes do jogo possuem taxa de 50%.";
   } else {
-    percentualMulta = 1.00; // Menos de 2h = 100%
+    percentualMulta = 1.00; 
     mensagemMulta = "Atenção: Cancelamentos com menos de 2 horas de antecedência exigem o pagamento integral (100%).";
   }
 
@@ -118,22 +108,21 @@ window.cancelarAgendamentoCliente = async function(id) {
   const valorMulta = valorCampo * percentualMulta;
   const multaFormatada = valorMulta.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
-  // 4. Confirmação com o Cliente
+
   let alertaConfirmacao = `Deseja realmente cancelar seu agendamento para o ${reserva.numero_campo}?\n\n${mensagemMulta}\n`;
   if (valorMulta > 0) {
     alertaConfirmacao += `\nValor da multa gerada: ${multaFormatada}\nSe você confirmar, não poderá fazer novas reservas até quitar este valor com a administração.`;
   }
 
-  if (!confirm(alertaConfirmacao)) return; // Se o cliente desistir do cancelamento, para aqui.
+  if (!confirm(alertaConfirmacao)) return;
 
-  // 5. Salva o cancelamento e a taxa no banco de dados
   const { error } = await _supabase
     .from('reservas')
     .update({ 
       status: 'Cancelado',
-      data_cancelamento: new Date().toISOString(), // Grava o momento exato do clique
+      data_cancelamento: new Date().toISOString(), 
       taxa_cancelamento: valorMulta,
-      taxa_paga: valorMulta === 0 // Se for 0, já nasce "paga". Se for > 0, nasce false.
+      taxa_paga: valorMulta === 0 
     })
     .eq('id', id);
 
@@ -145,10 +134,10 @@ window.cancelarAgendamentoCliente = async function(id) {
     } else {
       alert('Agendamento cancelado gratuitamente com sucesso!');
     }
-    inicializarPainelCliente(); // Recarrega a tela atualizada
+    inicializarPainelCliente(); 
   }
 };
-// Filtros em tempo real
+
 function aplicarFiltrosCliente() {
   const termo = inputBusca.value.toLowerCase();
   const filtroStatus = selectStatus.value;
@@ -168,5 +157,4 @@ function aplicarFiltrosCliente() {
 inputBusca.addEventListener('input', aplicarFiltrosCliente);
 selectStatus.addEventListener('change', aplicarFiltrosCliente);
 
-// Inicializa a execução
 inicializarPainelCliente();

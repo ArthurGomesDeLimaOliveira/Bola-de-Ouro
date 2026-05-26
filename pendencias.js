@@ -3,7 +3,6 @@ const inputBusca = document.getElementById('busca-pendencia');
 
 let todasAsPendencias = [];
 
-// Busca exclusivamentes os clientes que estão devendo
 async function buscarPendencias() {
   const { data, error } = await _supabase
     .from('reservas')
@@ -21,7 +20,6 @@ async function buscarPendencias() {
   renderizarPendencias(todasAsPendencias);
 }
 
-// Desenha a dívida na tela
 function renderizarPendencias(lista) {
   pendenciasLista.innerHTML = `<h3>Clientes Bloqueados (${lista.length})</h3>`;
 
@@ -38,7 +36,6 @@ function renderizarPendencias(lista) {
     const dataJogo = res.data_reserva.split('-').reverse().join('/');
     const taxaFormatada = parseFloat(res.taxa_cancelamento).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
     
-    // Formata a data e hora em que o cliente cancelou
     let dataCancelamentoStr = "Data não registrada";
     if (res.data_cancelamento) {
       const dataCanc = new Date(res.data_cancelamento);
@@ -67,7 +64,7 @@ function renderizarPendencias(lista) {
       
       <div style="text-align: right;">
         <button onclick="marcarTaxaPaga('${res.id}')" style="background: #1f8f3d; color: white; border: none; padding: 10px 16px; border-radius: 6px; font-size: 13px; cursor: pointer; font-weight: bold; transition: 0.2s; box-shadow: 0 2px 5px rgba(31, 143, 61, 0.3);">
-          💰 Registrar Pagamento
+           Registrar Pagamento
         </button>
         <div style="font-size: 10px; color: #888; margin-top: 8px; max-width: 150px;">
           Ao clicar, o cliente será desbloqueado para novos agendamentos.
@@ -92,11 +89,10 @@ window.marcarTaxaPaga = async function(id) {
     alert('Erro ao atualizar sistema: ' + error.message);
   } else {
     alert('Pagamento registrado! O cliente já pode voltar a jogar.');
-    buscarPendencias(); // O card some da tela na hora!
+    buscarPendencias();
   }
 };
 
-// Filtro de busca na tela de pendências
 inputBusca.addEventListener('input', () => {
   const termo = inputBusca.value.toLowerCase();
   const filtrados = todasAsPendencias.filter(res => 
@@ -106,5 +102,4 @@ inputBusca.addEventListener('input', () => {
   renderizarPendencias(filtrados);
 });
 
-// Inicia
 buscarPendencias();

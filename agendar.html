@@ -22,7 +22,6 @@
 
 <body>
 
-  <!-- NAVBAR -->
   <header class="header">
     <div class="logo">
       <div class="logo-circle"></div>
@@ -56,32 +55,21 @@
     </div>
   </header>
 
-  <!-- HERO -->
   <section class="banner">
     <h1>AGENDAR HORÁRIO</h1>
     <p>Escolha o campo, data e horário para sua partida</p>
   </section>
 
 
-  <!-- MAIN -->
   <main class="container">
 
-    <!-- LEFT -->
     <div class="left-side">
 
       <button class="back-btn">← Voltar</button>
 
       <h2>Escolha Data e Horário</h2>
 
-      <!-- SUBSTITUA APENAS ESTA PARTE DO SEU HTML -->
-      <!-- Troque a div abaixo:
-<div class="field-card">
-    ...
-</div>
--->
-
       <div class="custom-select">
-        <!-- Campo selecionado -->
         <div class="select-selected" onclick="toggleOptions()">
           <span id="selected-text">
             <div class="selected-card">
@@ -89,18 +77,15 @@
               <div class="selected-info">
                 <small>Society</small>
                 <strong>Campos</strong>
-                <!--parametro na url-->
               </div>
             </div>
           </span>
           <span class="arrow">▼</span>
         </div>
 
-        <!-- Lista de opções -->
         <div class="select-options" id="select-options">
 
 
-          <!-- OPÇÃO 1 -->
           <div class="option" onclick="selectOption(this)" id="campo1">
             <img src="imagens/fotohome.png" alt="Campo Society 1">
             <div class="option-info">
@@ -111,7 +96,6 @@
             </div>
           </div>
 
-          <!-- OPÇÃO 2 -->
           <div class="option" onclick="selectOption(this)" id="campo2">
             <img src="https://images.unsplash.com/photo-1546608235-3310a2494cdf?auto=format&fit=crop&w=1400&q=80"
               alt="Campo Society 2">
@@ -123,7 +107,6 @@
             </div>
           </div>
 
-          <!-- OPÇÃO 3 -->
           <div class="option" onclick="selectOption(this)" id="campo3">
             <img src="https://images.unsplash.com/photo-1529900748604-07564a03e7a6?auto=format&fit=crop&w=1400&q=80"
               alt="Campo Society 3">
@@ -205,7 +188,6 @@
         </div>
       </div>
 
-      <!-- CALENDAR -->
       <div class="calendar">
 
         <div class="calendar-header">
@@ -231,7 +213,6 @@
 
     </div>
 
-    <!-- RIGHT -->
     <div class="right-side">
 
       <h3>Horários Disponíveis</h3>
@@ -271,7 +252,6 @@
 
   </main>
 
-  <!-- CONFIRMATION -->
   <section class="confirmation">
 
     <div class="check">✓</div>
@@ -292,7 +272,6 @@
 
   </section>
 
-  <!-- FOOTER -->
   <div id="footerInc"></div>
 
   <script src="geral.js"></script>
@@ -315,10 +294,8 @@
       element = document.getElementById("quadra" + quadraUrl);
     }
 
-   // if (element) {
-      // Chama a função que criamos no agendamento.js
+
       selectOption(element);
-//    }
   </script>
 
 </body>

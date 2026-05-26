@@ -4,7 +4,6 @@ const selectsFiltro = document.querySelectorAll('.select');
 
 let todasAsReservas = [];
 
-// Função para procurar as reservas no Supabase
 async function buscarReservas() {
   const { data, error } = await _supabase
     .from('reservas')
@@ -21,9 +20,7 @@ async function buscarReservas() {
   renderizarReservas(todasAsReservas);
 }
 
-// Função para desenhar as reservas no HTML
 function renderizarReservas(lista) {
-  // Mantém apenas o título h3 original
   reservasLista.innerHTML = `<h3>Reservas (${lista.length})</h3>`;
 
   if (lista.length === 0) {
@@ -32,12 +29,10 @@ function renderizarReservas(lista) {
   }
 
   lista.forEach(res => {
-    // Formata a data para o padrão PT-BR (DD/MM/AAAA)
     const dataFormatada = res.data_reserva.split('-').reverse().join('/');
     const horaFormatada = res.horario_reserva.substring(0, 5) + 'h';
     const valorFormatado = parseFloat(res.valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
     
-    // --- LÓGICA DE EXIBIÇÃO DE TAXAS E MULTAS (VISÃO DO ADMIN) ---
     let infoTaxa = '';
     if (res.status === 'Cancelado' && res.taxa_cancelamento > 0) {
       if (res.taxa_paga) {
@@ -80,7 +75,6 @@ function renderizarReservas(lista) {
   });
 }
 
-// Função para o Admin cancelar uma reserva ativamente
 window.cancelarReserva = async function(id) {
   if (!confirm('Tem certeza de que deseja cancelar esta reserva?')) return;
 
@@ -93,11 +87,10 @@ window.cancelarReserva = async function(id) {
     alert('Erro ao cancelar: ' + error.message);
   } else {
     alert('Reserva cancelada com sucesso!');
-    buscarReservas(); // Atualiza a lista na tela
+    buscarReservas();
   }
 };
 
-// Função exclusiva do Admin para quitar taxas de clientes inadimplentes
 window.marcarTaxaPaga = async function(id) {
   if (!confirm('Deseja confirmar o pagamento desta taxa? Isso irá liberar o cliente para fazer novas reservas.')) return;
 
@@ -110,11 +103,10 @@ window.marcarTaxaPaga = async function(id) {
     alert('Erro ao atualizar: ' + error.message);
   } else {
     alert('Taxa quitada! Cliente liberado.');
-    buscarReservas(); // Atualiza a tela imediatamente para remover o aviso de dívida
+    buscarReservas();
   }
 };
 
-// Sistema de filtros (Busca por texto e seletores)
 function aplicarFiltros() {
   const termo = inputBusca.value.toLowerCase();
   const filtroTipo = selectsFiltro[0].value; // 'Todos os campos', 'Campo Society', 'Campo Areia'
@@ -142,5 +134,4 @@ function aplicarFiltros() {
 inputBusca.addEventListener('input', aplicarFiltros);
 selectsFiltro.forEach(select => select.addEventListener('change', aplicarFiltros));
 
-// Inicializa a busca quando a página abre
 buscarReservas();

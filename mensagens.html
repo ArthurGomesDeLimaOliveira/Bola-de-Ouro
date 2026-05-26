@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Gerenciar Reservas</title>
+  <title>Mensagens - Painel Admin</title>
   <link rel="stylesheet" href="reservas.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabase-config.js"></script>
@@ -13,7 +13,6 @@
 
   <div class="layout">
 
-    <!-- SIDEBAR -->
     <aside class="sidebar">
       <div class="sidebar-top">
         <div class="logo">
@@ -25,13 +24,13 @@
           <a href="dashboard.html" class="menu-item">Dashboard</a>
           <a href="reservas.html" class="menu-item">Reservas</a>
           <a href="pendencias.html" class="menu-item">Pendências</a>
-          <a href="mensagens.html" class="menu-item">Mensagens</a>
+          <a href="mensagens.html" class="menu-item active">Mensagens</a>
           <a href="relatorio.html" class="menu-item">Relatórios</a>
         </nav>
       </div>
 
       <div class="sidebar-bottom">
-        <a href="home.html" class="menu-item">  Voltar ao Site </a>
+        <a href="home.html" class="menu-item">Voltar ao Site</a>
       </div>
     </aside>
 
@@ -45,37 +44,26 @@
       <section class="content">
 
         <div class="title-area">
-          <h1>GERENCIAR RESERVAS</h1>
-          <p>Visualize e gerencie todas as reservas</p>
+          <h1>MENSAGENS RECEBIDAS</h1>
+          <p>Visualize as mensagens enviadas pelos clientes</p>
         </div>
 
         <div class="filter-box">
           <div class="filter-row">
-
             <div class="search">
-              <input type="text" placeholder="Buscar por campo, cliente ou data...">
+              <input type="text" id="busca-mensagem" placeholder="Buscar por nome, e-mail, telefone ou assunto...">
             </div>
 
-            <select class="select">
-              <option>Todos os campos</option>
-              <option>Campo Society</option>
-              <option>Campo Areia</option>
+            <select class="select" id="filtro-status-mensagem">
+              <option>Todas</option>
+              <option>Novas</option>
+              <option>Lidas</option>
             </select>
-
-            <select class="select">
-              <option>Todos</option>
-              <option>Ativos</option>
-              <option>Cancelados</option>
-            </select>
-
           </div>
         </div>
 
-        <div class="reservas-box">
-          <h3>Reservas (0)</h3>
-
-          <div class="reservas-content">
-          </div>
+        <div class="reservas-box" id="lista-mensagens">
+          <h3>Carregando...</h3>
         </div>
 
       </section>
@@ -83,9 +71,7 @@
 
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="supabase-config.js"></script>
-  <script src="reservas.js"></script>
+  <script src="mensagens.js"></script>
 
 </body>
 </html>

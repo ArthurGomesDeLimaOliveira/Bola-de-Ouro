@@ -1,4 +1,3 @@
-// Dicionário atualizado para coincidir exatamente com os nomes salvos no banco
 const mapaCampos = {
   'Campo Society 1': { tipo: 'Society' },
   'Campo Society 2': { tipo: 'Society' },
@@ -23,26 +22,21 @@ async function gerarRelatorioFinanceiro() {
 
   const reservasAtivas = reservas.filter(r => r.status === 'Ativo');
 
-  // Cálculos Gerais
   const totalFaturamento = reservasAtivas.reduce((acc, atual) => acc + parseFloat(atual.valor || 0), 0);
   const totalAgendamentos = reservasAtivas.length;
 
-  // Atualiza os Cards do topo
   document.querySelectorAll('.card h3.money')[0].textContent = totalFaturamento.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
   document.querySelectorAll('.card h3')[1].textContent = totalAgendamentos;
   
-  // Ticket Médio
   const ticketMedio = totalAgendamentos > 0 ? (totalFaturamento / totalAgendamentos) : 0;
   document.querySelectorAll('.card h3.money')[1].textContent = ticketMedio.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
-  // Society vs Areia
   const recSociety = reservasAtivas.filter(r => r.tipo_campo === 'Society').reduce((acc, r) => acc + parseFloat(r.valor || 0), 0);
   const recAreia = reservasAtivas.filter(r => r.tipo_campo === 'Areia').reduce((acc, r) => acc + parseFloat(r.valor || 0), 0);
   
   document.querySelectorAll('.society-areia-item .value')[0].textContent = recSociety.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
   document.querySelectorAll('.society-areia-item .value')[1].textContent = recAreia.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
-  // Renderiza a tabela
   const tabelaCorpo = document.querySelector('table tbody');
   tabelaCorpo.innerHTML = ''; 
 
@@ -63,7 +57,6 @@ async function gerarRelatorioFinanceiro() {
     tabelaCorpo.appendChild(linha);
   });
 
-  // Linha total
   const linhaTotal = document.createElement('tr');
   linhaTotal.className = 'total-row';
   linhaTotal.innerHTML = `<td><b>Total</b></td><td></td><td><b>${totalAgendamentos}</b></td><td class="money"><b>${totalFaturamento.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</b></td><td><b>100%</b></td>`;
