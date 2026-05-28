@@ -6,6 +6,7 @@
   <title>Relatórios Financeiros</title>
   <link rel="stylesheet" href="relatorio.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="supabase-config.js"></script>
   <script src="auth-check.js"></script>
 </head>
@@ -117,29 +118,7 @@
           <p class="subtext">Receita e número de reservas ao longo do tempo</p>
 
           <div class="fake-chart">
-
-            <div class="chart-grid"></div>
-
-            <div class="y-labels">
-              <span>R$4</span>
-              <span>R$3</span>
-              <span>R$2</span>
-              <span>R$1</span>
-              <span>R$0</span>
-            </div>
-
-            <div class="chart-line"></div>
-
-            <div class="x-labels">
-              <span>19/04</span>
-              <span>24/04</span>
-              <span>29/04</span>
-              <span>04/05</span>
-              <span>09/05</span>
-              <span>14/05</span>
-            </div>
-
-            <div class="chart-footer">Receita</div>
+            <canvas id="chartEvolucaoReceita" style="width: 100%; height: 100%; display: block;"></canvas>
           </div>
         </div>
 

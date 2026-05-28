@@ -155,6 +155,13 @@ if (btnPrevMonth && btnNextMonth) {
 renderizarCalendario();
 
 
+function horarioJaPassou(hora) {
+  if (!dataSelecionada || !hora) return false;
+
+  const dataHoraSelecionada = new Date(`${dataSelecionada}T${hora}:00`);
+  return dataHoraSelecionada <= new Date();
+}
+
 async function verificarDisponibilidade() {
   horarioSelecionado = "";
   botoesTempo.forEach(t => t.classList.remove("active"));
@@ -176,14 +183,14 @@ async function verificarDisponibilidade() {
   const horariosBloqueados = reservasOcupadas.map(res => res.horario_reserva.substring(0, 5));
 
   botoesTempo.forEach(btn => {
-    const horaDoBotao = btn.textContent;
+    const horaDoBotao = btn.textContent.trim();
 
     btn.classList.remove("disabled");
     btn.disabled = false;
     btn.style.opacity = '1';
     btn.style.cursor = 'pointer';
 
-    if (horariosBloqueados.includes(horaDoBotao)) {
+    if (horariosBloqueados.includes(horaDoBotao) || horarioJaPassou(horaDoBotao)) {
       btn.classList.add("disabled");
       btn.disabled = true;
       btn.style.opacity = '0.4';
@@ -206,10 +213,17 @@ botoesTempo.forEach((btn) => {
 
     if (btn.classList.contains("disabled")) return; // Não faz nada se estiver bloqueado
 
+    const horaDoBotao = btn.textContent.trim();
+    if (horarioJaPassou(horaDoBotao)) {
+      alert("Este horario ja passou. Por favor, selecione outro horario disponivel.");
+      verificarDisponibilidade();
+      return;
+    }
+
     botoesTempo.forEach((item) => item.classList.remove("active"));
     btn.classList.add("active");
 
-    horarioSelecionado = btn.textContent + ":00";
+    horarioSelecionado = horaDoBotao + ":00";
   });
 });
 
@@ -226,6 +240,12 @@ if (btnContinuar) {
     }
     if (!horarioSelecionado) {
       alert("Você esqueceu de escolher o horário! Selecione um horário disponível antes de continuar.");
+      return;
+    }
+
+    if (horarioJaPassou(horarioSelecionado.substring(0, 5))) {
+      alert("Este horario ja passou. Por favor, selecione outro horario disponivel.");
+      verificarDisponibilidade();
       return;
     }
 
