@@ -288,6 +288,7 @@ if (btnContinuar) {
       .from('reservas')
       .insert([
         {
+          user_id: user.id,
           numero_campo: campoSelecionado,
           data_reserva: dataSelecionada,
           horario_reserva: horarioSelecionado,

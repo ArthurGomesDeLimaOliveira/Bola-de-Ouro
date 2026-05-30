@@ -4,6 +4,12 @@ const selectStatus = document.getElementById('filtro-status-cliente');
 const nomeUsuarioTopbar = document.getElementById('nome-usuario-topbar');
 
 let minhasReservas = [];
+let usuarioAtual = null;
+
+function reservaJaPassou(reserva) {
+  const dataHoraReserva = new Date(`${reserva.data_reserva}T${reserva.horario_reserva}`);
+  return dataHoraReserva <= new Date();
+}
 
 async function inicializarPainelCliente() {
   const { data: { user }, error: authError } = await _supabase.auth.getUser();
@@ -14,12 +20,15 @@ async function inicializarPainelCliente() {
     return;
   }
 
+  usuarioAtual = user;
+
   const nomeCompleto = user.user_metadata?.full_name || "Jogador";
   nomeUsuarioTopbar.textContent = nomeCompleto;
 
   const { data, error } = await _supabase
     .from('reservas')
     .select('*')
+    .eq('user_id', user.id)
     .order('data_reserva', { ascending: true })
     .order('horario_reserva', { ascending: true });
 
@@ -28,7 +37,7 @@ async function inicializarPainelCliente() {
     return;
   }
 
-  minhasReservas = data;
+  minhasReservas = (data || []).filter(res => res.arquivada !== true);
   renderizarReservasCliente(minhasReservas);
 }
 
@@ -44,6 +53,13 @@ function renderizarReservasCliente(lista) {
     const dataFormatada = res.data_reserva.split('-').reverse().join('/');
     const horaFormatada = res.horario_reserva.substring(0, 5) + 'h';
     const valorFormatado = parseFloat(res.valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    const jaPassou = reservaJaPassou(res);
+    const botaoCancelar = res.status === 'Ativo' && !jaPassou
+      ? `<button onclick="cancelarAgendamentoCliente('${res.id}')" style="background: #c62828; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 11px; cursor: pointer; font-weight: bold; transition: 0.2s;">Cancelar HorÃ¡rio</button>`
+      : '';
+    const botaoArquivar = jaPassou
+      ? `<button onclick="arquivarReservaCliente('${res.id}')" style="background: #1f8f3d; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 11px; cursor: pointer; font-weight: bold;">Arquivar</button>`
+      : '';
 
     const cardReserva = document.createElement('div');
     cardReserva.className = 'reserva-item';
@@ -67,6 +83,13 @@ function renderizarReservasCliente(lista) {
         ${res.status === 'Ativo' ? `<button onclick="cancelarAgendamentoCliente('${res.id}')" style="background: #c62828; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 11px; cursor: pointer; font-weight: bold; transition: 0.2s;">Cancelar Horário</button>` : ''}
       </div>
     `;
+
+    if (jaPassou) {
+      const acoesReserva = cardReserva.children[1];
+      const botaoCancelarExistente = acoesReserva.querySelector('button');
+      if (botaoCancelarExistente) botaoCancelarExistente.remove();
+      acoesReserva.insertAdjacentHTML('beforeend', botaoArquivar);
+    }
     
     reservasLista.appendChild(cardReserva);
   });
@@ -124,7 +147,8 @@ window.cancelarAgendamentoCliente = async function(id) {
       taxa_cancelamento: valorMulta,
       taxa_paga: valorMulta === 0 
     })
-    .eq('id', id);
+    .eq('id', id)
+    .eq('user_id', usuarioAtual.id);
 
   if (error) {
     alert('Erro ao realizar o cancelamento: ' + error.message);
@@ -135,6 +159,34 @@ window.cancelarAgendamentoCliente = async function(id) {
       alert('Agendamento cancelado gratuitamente com sucesso!');
     }
     inicializarPainelCliente(); 
+  }
+};
+
+window.arquivarReservaCliente = async function(id) {
+  const reserva = minhasReservas.find(r => r.id === id);
+  if (!reserva) return;
+
+  if (!reservaJaPassou(reserva)) {
+    alert('Somente reservas passadas podem ser arquivadas.');
+    return;
+  }
+
+  if (!confirm('Deseja arquivar esta reserva? Ela saira da sua lista principal, mas continuara salva no sistema.')) return;
+
+  const { error } = await _supabase
+    .from('reservas')
+    .update({
+      arquivada: true,
+      arquivada_em: new Date().toISOString()
+    })
+    .eq('id', id)
+    .eq('user_id', usuarioAtual.id);
+
+  if (error) {
+    alert('Erro ao arquivar reserva: ' + error.message);
+  } else {
+    alert('Reserva arquivada com sucesso!');
+    inicializarPainelCliente();
   }
 };
 

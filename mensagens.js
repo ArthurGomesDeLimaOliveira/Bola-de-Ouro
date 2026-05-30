@@ -25,7 +25,7 @@ async function buscarMensagens() {
     return;
   }
 
-  todasAsMensagens = data || [];
+  todasAsMensagens = (data || []).filter(msg => msg.arquivada !== true);
   renderizarMensagens(todasAsMensagens);
 }
 
@@ -69,7 +69,7 @@ function renderizarMensagens(lista) {
         <span style="padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; background: ${statusMensagem === 'Lida' ? '#eefaf1' : '#ffebee'}; color: ${statusMensagem === 'Lida' ? '#1f8f3d' : '#c62828'};">
           ${statusMensagem.toUpperCase()}
         </span>
-        ${statusMensagem !== 'Lida' ? `<button onclick="marcarMensagemLida('${msg.id}')" style="background: #1f8f3d; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 11px; cursor: pointer; font-weight: bold;">Marcar como lida</button>` : ''}
+        ${statusMensagem !== 'Lida' ? `<button onclick="marcarMensagemLida('${msg.id}')" style="background: #1f8f3d; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 11px; cursor: pointer; font-weight: bold;">Marcar como lida</button>` : `<button onclick="arquivarMensagem('${msg.id}')" style="background: #1f8f3d; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 11px; cursor: pointer; font-weight: bold;">Arquivar</button>`}
       </div>
     `;
 
@@ -85,6 +85,25 @@ window.marcarMensagemLida = async function(id) {
 
   if (error) {
     alert('Erro ao atualizar mensagem: ' + error.message);
+  } else {
+    buscarMensagens();
+  }
+};
+
+window.arquivarMensagem = async function(id) {
+  if (!confirm('Deseja arquivar esta mensagem? Ela saira da lista principal, mas continuara salva no banco.')) return;
+
+  const { error } = await _supabase
+    .from('mensagens_contato')
+    .update({
+      arquivada: true,
+      arquivada_em: new Date().toISOString()
+    })
+    .eq('id', id)
+    .eq('status_mensagem', 'Lida');
+
+  if (error) {
+    alert('Erro ao arquivar mensagem: ' + error.message);
   } else {
     buscarMensagens();
   }

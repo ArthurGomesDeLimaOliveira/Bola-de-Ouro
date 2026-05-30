@@ -4,6 +4,11 @@ const selectsFiltro = document.querySelectorAll('.select');
 
 let todasAsReservas = [];
 
+function reservaJaPassou(reserva) {
+  const dataHoraReserva = new Date(`${reserva.data_reserva}T${reserva.horario_reserva}`);
+  return dataHoraReserva <= new Date();
+}
+
 async function buscarReservas() {
   const { data, error } = await _supabase
     .from('reservas')
@@ -16,7 +21,7 @@ async function buscarReservas() {
     return;
   }
 
-  todasAsReservas = data;
+  todasAsReservas = (data || []).filter(res => res.arquivada !== true);
   renderizarReservas(todasAsReservas);
 }
 
@@ -47,6 +52,14 @@ function renderizarReservas(lista) {
       }
     }
 
+    const jaPassou = reservaJaPassou(res);
+    const botaoCancelar = res.status === 'Ativo' && !jaPassou
+      ? `<button onclick="cancelarReserva('${res.id}')" style="background: #c62828; color: white; border: none; padding: 4px 8px; border-radius: 4px; font-size: 11px; cursor: pointer;">Cancelar Admin</button>`
+      : '';
+    const botaoArquivar = jaPassou
+      ? `<button onclick="arquivarReservaAdmin('${res.id}')" style="background: #1f8f3d; color: white; border: none; padding: 4px 8px; border-radius: 4px; font-size: 11px; cursor: pointer;">Arquivar</button>`
+      : '';
+
     const cardReserva = document.createElement('div');
     cardReserva.className = 'reserva-item';
     cardReserva.style = 'background: #fff; padding: 15px; border-radius: 6px; margin-top: 10px; border: 1px solid #e2e2e2; display: flex; justify-content: space-between; align-items: center;';
@@ -67,7 +80,8 @@ function renderizarReservas(lista) {
         <span style="padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; background: ${res.status === 'Ativo' ? '#eefaf1' : '#ffebee'}; color: ${res.status === 'Ativo' ? '#1f8f3d' : '#c62828'};">
           ${res.status.toUpperCase()}
         </span>
-        ${res.status === 'Ativo' ? `<button onclick="cancelarReserva('${res.id}')" style="background: #c62828; color: white; border: none; padding: 4px 8px; border-radius: 4px; font-size: 11px; cursor: pointer;">Cancelar Admin</button>` : ''}
+        ${botaoCancelar}
+        ${botaoArquivar}
       </div>
     `;
     
@@ -87,6 +101,25 @@ window.cancelarReserva = async function(id) {
     alert('Erro ao cancelar: ' + error.message);
   } else {
     alert('Reserva cancelada com sucesso!');
+    buscarReservas();
+  }
+};
+
+window.arquivarReservaAdmin = async function(id) {
+  if (!confirm('Deseja arquivar esta reserva? Ela saira da lista principal, mas continuara salva no banco.')) return;
+
+  const { error } = await _supabase
+    .from('reservas')
+    .update({
+      arquivada: true,
+      arquivada_em: new Date().toISOString()
+    })
+    .eq('id', id);
+
+  if (error) {
+    alert('Erro ao arquivar: ' + error.message);
+  } else {
+    alert('Reserva arquivada com sucesso!');
     buscarReservas();
   }
 };
